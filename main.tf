@@ -48,7 +48,7 @@ resource "aws_security_group" "rds" {
   }
 }
 
-resource "aws_db_parameter_group" "education" {
+resource "aws_db_parameter_group" "educationshaun" {
   name   = "education"
   family = "postgres14"
 

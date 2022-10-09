@@ -53,7 +53,7 @@ resource "aws_db_parameter_group" "educationss" {
   family = "postgres14"
 
   parameter {
-    name  = "log_connections_ss"
+    name  = "log_connections"
     value = "1"
   }
 }

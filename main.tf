@@ -65,7 +65,7 @@ resource "aws_db_instance" "educationss" {
   password               = var.db_password
   db_subnet_group_name   = aws_db_subnet_group.educationss.name
   vpc_security_group_ids = [aws_security_group.rdsss.id]
-  parameter_group_name   = aws_db_parameter_group.educationss.name
+  
   publicly_accessible    = true
   skip_final_snapshot    = true
 }

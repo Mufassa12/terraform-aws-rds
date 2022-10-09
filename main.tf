@@ -16,7 +16,7 @@ module "vpc" {
   enable_dns_support   = true
 }
 
-resource "aws_db_subnet_group" "education" {
+resource "aws_db_subnet_group" "educationshaun" {
   name       = "education"
   subnet_ids = module.vpc.public_subnets
 
@@ -25,7 +25,7 @@ resource "aws_db_subnet_group" "education" {
   }
 }
 
-resource "aws_security_group" "rds" {
+resource "aws_security_group" "rdsshaun" {
   name   = "education_rds"
   vpc_id = module.vpc.vpc_id
 
@@ -49,7 +49,7 @@ resource "aws_security_group" "rds" {
 }
 
 resource "aws_db_parameter_group" "educationshaun" {
-  name   = "education"
+  name   = "educationshaun"
   family = "postgres14"
 
   parameter {
@@ -64,7 +64,7 @@ resource "random_pet" "random" {
   length = 1
 }
 
-resource "aws_db_instance" "education" {
+resource "aws_db_instance" "educationshaun" {
   identifier             = "${var.db_name}-${random_pet.random.id}"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
@@ -72,7 +72,7 @@ resource "aws_db_instance" "education" {
   engine_version         = "14.1"
   username               = var.db_username
   password               = var.db_password
-  db_subnet_group_name   = aws_db_subnet_group.education.name
+  db_subnet_group_name   = aws_db_subnet_group.educationshaun.name
   vpc_security_group_ids = [aws_security_group.rds.id]
   parameter_group_name   = aws_db_parameter_group.educationshaun.name
   publicly_accessible    = true

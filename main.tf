@@ -48,15 +48,6 @@ resource "aws_security_group" "rdsss" {
   }
 }
 
-resource "aws_db_parameter_group" "educationss" {
-  name   = "educationss"
-  family = "postgres14"
-
-  parameter {
-    name  = "log_connections"
-    value = "1"
-  }
-}
 
 provider "random" {}
 

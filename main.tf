@@ -8,7 +8,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.77.0"
 
-  name                 = "educationss"
+  name                 = "edulearning"
   cidr                 = "10.0.0.0/16"
   azs                  = data.aws_availability_zones.available.names
   public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
@@ -16,17 +16,17 @@ module "vpc" {
   enable_dns_support   = true
 }
 
-resource "aws_db_subnet_group" "educationss" {
-  name       = "educationss"
+resource "aws_db_subnet_group" "edulearning" {
+  name       = "edulearning"
   subnet_ids = module.vpc.public_subnets
 
   tags = {
-    Name = "Education"
+    Name = "edulearning"
   }
 }
 
-resource "aws_security_group" "rdsss" {
-  name   = "education_rdsss"
+resource "aws_security_group" "rdsedulearning" {
+  name   = "education_rdsedulearning"
   vpc_id = module.vpc.vpc_id
 
   ingress {
@@ -44,7 +44,7 @@ resource "aws_security_group" "rdsss" {
   }
 
   tags = {
-    Name = "education_rdsss"
+    Name = "education_rdsedulearning"
   }
 }
 
@@ -55,7 +55,7 @@ resource "random_pet" "random" {
   length = 1
 }
 
-resource "aws_db_instance" "educationss" {
+resource "aws_db_instance" "edulearning" {
   identifier             = "${var.db_name}-${random_pet.random.id}"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
@@ -63,8 +63,8 @@ resource "aws_db_instance" "educationss" {
   engine_version         = "14.1"
   username               = var.db_username
   password               = var.db_password
-  db_subnet_group_name   = aws_db_subnet_group.educationss.name
-  vpc_security_group_ids = [aws_security_group.rdsss.id]
+  db_subnet_group_name   = aws_db_subnet_group.edulearning.name
+  vpc_security_group_ids = [aws_security_group.rdsedulearning.id]
   
   publicly_accessible    = true
   skip_final_snapshot    = true

@@ -1,3 +1,4 @@
+//aws proivder
 provider "aws" {
   region = "us-east-2"
 }
